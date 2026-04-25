@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Work Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
+
+:root {
+  --color-h1: #00a2ff;
+}
+
+/* Corregido para que el footer no flote en medio de la pantalla */
+body {
+  background: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  position: relative; /* <--- Añade esto */
+  width: 100%; /* Asegura que ocupe todo el ancho */
+}
+
+.seccion {
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.descargar h1 {
+  font-size: 45px;
+  color: var(--color-h1);
+  text-align: center;
+}
+
+.seccion hr {
+  border: none;
+  height: 5px;
+  width: 30%;
+  border-radius: 100px;
+  background: linear-gradient(to right, #008fe1, #00c3ff, #008cdc);
+}
+
+.search-box,
+.input-box {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.input-box {
+  width: 50%;
+  cursor: default;
+  border-radius: 20px;
+  border: 2px solid #00a2ff;
+  transition: ease 0.5s;
+  padding: 18px; /* Movido aqui para que el borde no baile */
+}
+
+.input-box:hover {
+  box-shadow: 0 0 15px #00a2ff58;
+  width: 100%;
+}
+
+.input-box input {
+  caret-shape: block;
+  color: #008cdc;
+  font-weight: 500;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.input-box i {
+  background: transparent;
+  color: #0085d3;
+}
+
+/* Estilo para el boton tal cual el tuyo */
+.btn button {
+  padding: 18px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-radius: 15px;
+  border: 2px solid #0078bd;
+  background: #0093e8;
+  color: #fff;
+  transition: ease 0.5s;
+  cursor: pointer;
+}
+
+.btn button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 10px #0078bda9;
+}
+
+/* Footer corregido */
+footer {
+  flex-shrink: 0; /* <--- Evita que el footer se aplaste o deforme */
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  background: #fff;
+  border-top: 1px solid #eee;
+}
+
+footer p {
+  color: #666;
+  font-size: 14px;
+}
+
+/* Media query para que no se rompa en movil */
+@media (max-width: 768px) {
+  .seccion {
+    width: 90%;
+  }
+  .search-box {
+    flex-direction: column;
+  }
+  .input-box {
+    width: 100% !important;
+  }
+}
+
+.loader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  color: #008cdc;
+  font-weight: bold;
+}
+
+/* Spinner circular azul */
+.spinner-blue {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #00a2ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animación de entrada para el iframe */
+iframe {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

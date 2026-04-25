@@ -1,0 +1,23 @@
+MP3-SOUND/
+├── app/
+│   ├── __init__.py          # (Vacío, solo para que Python reconozca el módulo)
+│   ├── static/
+│   │   ├── css/
+│   │   │   └── style.css
+│   │   │   └── opciones.css
+│   │   └── js/
+│   │       └── analyzer.js
+│   │       └── opciones.js
+│   ├── templates/
+│   │   ├── base.html        # Plantilla base (Navbar/Footer)
+│   │   ├── index.html       # Formulario de enlace
+│   │   └── opciones.html    # Fragmento que se cargará con los resultados
+│   └── utils/
+│       └── downloader.py    # El motor con yt-dlp
+├── downloads/               # Carpeta de salida (ignorar en git)
+├── main.py                  # Servidor Flask
+└── requirements.txt         # Librerías
+└── .htaccess
+└── ffmpeg.exe
+└── ffplay.exe
+└── ffprobe.exe

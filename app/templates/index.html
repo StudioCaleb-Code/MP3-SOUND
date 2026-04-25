@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <title>MP3-SOUND | Convertidor</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/opciones.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <main>
+        <section class="seccion descargar">
+            <h1>MP3-SOUND <i class="bi bi-music-note-list"></i></h1>
+            <hr>
+            <br>
+            <div class="search-box">
+                <div class="input-box">
+                    <input type="text" id="url-input" placeholder="Pega el link de YouTube aquí...">
+                    <i class="bi bi-music-note"></i>
+                </div>
+
+                <div class="btn">
+                    <button onclick="analizarLink()">
+                        <i class="bi bi-search"></i>
+                        <span>Analizar</span>
+                    </button>
+                </div>
+            </div>
+
+
+            <div id="resultado-analisis"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Todos los derechos reservados @CatStudio - Caleb</p>
+    </footer>
+
+    <script src="/static/js/analyzer.js"></script>
+    <script src="/static/js/opciones.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,226 @@
+/* --- CONTENEDOR PRINCIPAL: LA BASE --- */
+.info-card {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 25px;
+  background: #ffffff;
+  border-radius: 30px;
+  /* box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); */
+}
+
+/* --- TARJETA DE PREVISUALIZACIÓN: EL ENCABEZADO --- */
+.card-prevista {
+  width: 100%;
+  display: flex;
+  background: #00b3ff;
+  padding: 20px;
+  border-radius: 20px;
+  align-items: center;
+  gap: 20px;
+  color: #ffffff;
+}
+
+.card-prevista .icono-img {
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 18px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-prevista img {
+  width: 220px;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.detalles-video {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.video-title {
+  font-size: 1.2rem;
+  margin: 0;
+  font-weight: 800;
+  line-height: 1.2;
+  color: #ffffff;
+}
+
+.meta-info {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.meta-info p {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 8px 15px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  backdrop-filter: blur(5px);
+}
+
+/* --- FORMULARIO Y FILA DE CONTROLES (EL CORAZÓN) --- */
+#downloadForm {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.controles-descarga {
+  width: 100%;
+  display: flex;
+  align-items: center; /* OBLIGA A QUE MIDAN LO MISMO DE ALTO */
+  justify-content: center;
+  gap: 12px;
+}
+
+/* CAJAS SELECTORAS (GROUP) */
+.group {
+  position: relative; /* PARA QUE EL MENÚ NO EMPUJE NADA */
+  width: 100%;
+  background: #f9f9f9;
+  border-radius: 15px;
+  border: 2px solid #eeeeee;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.selected-box {
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.group:hover {
+  border-color: #00b3ff;
+  background: #ffffff;
+}
+
+/* --- MENÚ DESPLEGABLE: EL QUE FLOTA SOBRE TODO --- */
+.options-list {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.2);
+  display: none;
+  z-index: 9999; 
+  /* overflow-y: auto; */
+  border: 1px solid #eeeeee;
+  padding: 5px 0;
+}
+
+.options-list .item {
+  padding: 12px 20px;
+  font-size: 0.9rem;
+  color: #555;
+  transition: 0.2s;
+  border-bottom: 1px solid #f9f9f9;
+}
+
+.options-list .item:last-child {
+  border-bottom: none;
+}
+
+.options-list .item:hover {
+  background: #00b3ff;
+  color: #ffffff;
+}
+
+/* ESTADOS ACTIVOS */
+.group.active {
+  z-index: 1001;
+  border-color: #00b3ff;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(0, 179, 255, 0.1);
+}
+
+.group.active .options-list {
+  display: block;
+  animation: slideUp 0.2s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.group.active i.arrow {
+  transform: rotate(180deg);
+  color: #00b3ff;
+}
+
+/* --- EL BOTÓN DE DESCARGA: MISMA FILA --- */
+.btn-descargar button {
+  width: 100%;
+  padding: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 15px;
+  border: none;
+  background: #0093e8;
+  color: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 15px #0093e84d;
+}
+
+.btn-descargar button:hover {
+  background: #007dc5;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 147, 232, 0.4);
+}
+
+.btn-descargar button:active {
+  transform: scale(0.97);
+}
+
+/* --- RESPONSIVE: MÓVILES --- */
+@media (max-width: 800px) {
+  .controles-descarga {
+    flex-direction: column;
+    align-items: center;
+  }
+  .group,
+  .btn-descargar {
+    max-width: 100%;
+    width: 100%;
+  }
+  .card-prevista {
+    flex-direction: column;
+    text-align: center;
+  }
+  .card-prevista img {
+    width: 100%;
+  }
+}

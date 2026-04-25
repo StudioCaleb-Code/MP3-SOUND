@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="../static/css/opciones.css">
+
+<div class="info-card" id="info-video-analizado" data-maxres="{{ info.max_res }}">
+    <div class="card-prevista">
+        <div class="icono-img">
+            <img src="{{ info.thumbnail }}" alt="miniatura" id="thumb-fallback">
+        </div>
+        <div class="detalles-video">
+            <h3 class="video-title">{{ info.titulo }}</h3>
+            <div class="meta-info">
+                <p><i class="bi bi-play-btn"></i> <span>{{ info.fuente }}</span></p>
+                <p><i class="bi bi-clock"></i> <span>{{ info.duracion }}</span></p>
+            </div>
+        </div>
+    </div>
+
+    <form action="/descargar" method="POST" id="downloadForm">
+        <input type="hidden" name="url" value="{{ info.url }}">
+        <input type="hidden" name="tipo" id="hiddenTipo" value="audio">
+        <input type="hidden" name="calidad" id="hiddenCalidad" value="320">
+
+        <div class="controles-descarga">
+            <div class="group" onclick="toggleMenu(this)">
+                <div class="selected-box">
+                    <span id="selectedTipoText">MP3 (Audio)</span>
+                    <i class="bi bi-chevron-up arrow"></i>
+                </div>
+                <div class="options-list">
+                    <div class="item" onclick="selectOption('tipo', 'audio', 'MP3 (Audio)')">MP3 (Audio)</div>
+                    <div class="item" onclick="selectOption('tipo', 'video', 'MP4 (Video)')">MP4 (Video)</div>
+                </div>
+            </div>
+
+            <div class="group" onclick="toggleMenu(this)">
+                <div class="selected-box">
+                    <span id="selectedCalidadText">320 kbps</span>
+                    <i class="bi bi-chevron-up arrow"></i>
+                </div>
+                <div class="options-list" id="contenedor-calidades">
+                    <div class="opcion-audio item" onclick="selectOption('calidad', '320', '320 kbps')">320 kbps</div>
+                    <div class="opcion-audio item" onclick="selectOption('calidad', '192', '192 kbps')">192 kbps</div>
+                    <div class="opcion-audio item" onclick="selectOption('calidad', '128', '128 kbps')">128 kbps</div>
+
+                    {% for res in info.lista_calidades %}
+                    <div class="opcion-video item" style="display: none;"
+                        onclick="selectOption('calidad', '{{ res }}', '{{ res }}p')">
+                        {{ res }}p
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="btn-descargar">
+            <button type="submit" id="btn-final">
+                <i class="bi bi-download"></i>
+                <span>DESCARGAR</span>
+            </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,13 @@
+# MP3-SOUND/.htaccess
+RewriteEngine On
+
+# 1. Quitar el .html de la URL (Redirección estética)
+# Si alguien intenta entrar a /registro.html, lo manda a /registro
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [L,R=301]
+
+# 2. Manejar las rutas a través de Flask
+# Si el archivo no existe físicamente (como /convertidor), pásalo a main.py
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ main.py/$1 [L]
