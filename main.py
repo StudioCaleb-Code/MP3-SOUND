@@ -1,28 +1,19 @@
 from flask import Flask, render_template, request, jsonify, send_file, after_this_request
 import os
 import time
-import logging
-
-# Importamos las funciones del motor de descarga
-# Asegúrate de que la carpeta 'app' tenga un archivo __init__.py vacío
 from app.utils.downloader import obtener_info_video, descargar_media
 
-# Configuración de rutas base para PythonAnywhere
+app = Flask(__name__,
+            template_folder='app/templates',
+            static_folder='app/static')
+
+# Configuración de rutas absolutas
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TEMPLATE_DIR = os.path.join(BASE_DIR, 'app', 'templates')
-STATIC_DIR = os.path.join(BASE_DIR, 'app', 'static')
 DOWNLOAD_FOLDER = os.path.join(BASE_DIR, 'downloads')
 
-app = Flask(__name__,
-            template_folder=TEMPLATE_DIR,
-            static_folder=STATIC_DIR)
-
-# Configuración de la carpeta de descargas
-app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
-
-# Asegurar que la carpeta de descargas existe con permisos
+# Asegurar que la carpeta de descargas existe
 if not os.path.exists(DOWNLOAD_FOLDER):
-    os.makedirs(DOWNLOAD_FOLDER, exist_ok=True)
+    os.makedirs(DOWNLOAD_FOLDER)
 
 @app.route('/')
 def index():
@@ -39,12 +30,11 @@ def analizar():
         info = obtener_info_video(url)
 
         if info:
-            # Flask buscará opciones.html dentro de app/templates/
             return render_template('opciones.html', info=info)
 
         return jsonify({"error": "No se pudo analizar el video o el link es inválido."}), 404
     except Exception as e:
-        app.logger.error(f"Error en /analizar: {e}")
+        print(f"Error en /analizar: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
 @app.route('/descargar', methods=['POST'])
@@ -57,7 +47,6 @@ def descargar():
         return "Error: URL faltante", 400
 
     try:
-        # La función descargar_media debe guardar el archivo en DOWNLOAD_FOLDER
         path_archivo = descargar_media(url, tipo, calidad)
 
         if path_archivo and os.path.exists(path_archivo):
@@ -69,17 +58,14 @@ def descargar():
             }
             content_type = mimetype_dict.get(tipo, 'application/octet-stream')
 
-            # Pequeña pausa para asegurar que el sistema de archivos cerró el archivo
             time.sleep(1)
 
             @after_this_request
             def remove_file(response):
                 try:
-                    # Opcional: puedes habilitar el borrado aquí si ya no necesitas el archivo
-                    # os.remove(path_archivo)
                     pass
                 except Exception as error:
-                    app.logger.error(f"Error gestionando archivo tras respuesta: {error}")
+                    app.logger.error(f"Error eliminando archivo: {error}")
                 return response
 
             return send_file(
@@ -89,15 +75,15 @@ def descargar():
                 mimetype=content_type
             )
         else:
-            return f"Error: No se encontró el archivo. Intenta otra calidad.", 404
+            return f"Error: No se encontró el archivo en {calidad}p. Intenta otra calidad.", 404
 
     except Exception as e:
-        app.logger.error(f"Error crítico en /descargar: {e}")
+        print(f"Error crítico en /descargar: {e}")
         return f"Error al procesar la descarga: {e}", 500
 
 @app.route('/limpiar')
 def limpiar_descargas():
-    """Limpia archivos viejos en la carpeta downloads"""
+    """Ruta de mantenimiento para vaciar la carpeta downloads"""
     try:
         count = 0
         for filename in os.listdir(DOWNLOAD_FOLDER):
@@ -109,6 +95,6 @@ def limpiar_descargas():
     except Exception as e:
         return f"Error al limpiar: {str(e)}", 500
 
-# Bloque para ejecución local (se ignora en PythonAnywhere)
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Ejecución del servidor
+    app.run(debug=True, port=5000)
