@@ -157,6 +157,9 @@ main {
 /* Footer corregido */
 footer {
   flex-shrink: 0; /* <--- Evita que el footer se aplaste o deforme */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   padding: 20px;
   text-align: center;
