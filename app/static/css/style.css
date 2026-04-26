@@ -21,6 +21,39 @@ body {
   flex-direction: column;
 }
 
+header{
+  width: 100%;
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 25px; 
+  border-bottom: 1px solid #ececec;
+}
+header h2{
+  color: var(--color-h1);
+}
+.box-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.box-header .box-btn{
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border: none;
+  text-decoration: none;
+  background: transparent;
+  color: #008fd6;
+}
+
 main {
   flex: 1;
   padding: 30px;
