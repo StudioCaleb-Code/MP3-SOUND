@@ -15,9 +15,11 @@ DOWNLOAD_FOLDER = os.path.join(BASE_DIR, 'downloads')
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/analizar', methods=['POST'])
 def analizar():
@@ -37,10 +39,11 @@ def analizar():
         print(f"Error en /analizar: {e}")
         return jsonify({"error": "Error interno del servidor"}), 500
 
+
 @app.route('/descargar', methods=['POST'])
 def descargar():
     url = request.form.get('url')
-    tipo = request.form.get('tipo') 
+    tipo = request.form.get('tipo')
     calidad = request.form.get('calidad')
 
     if not url:
@@ -81,6 +84,7 @@ def descargar():
         print(f"Error crítico en /descargar: {e}")
         return f"Error al procesar la descarga: {e}", 500
 
+
 @app.route('/limpiar')
 def limpiar_descargas():
     """Ruta de mantenimiento para vaciar la carpeta downloads"""
@@ -94,6 +98,7 @@ def limpiar_descargas():
         return f"Carpeta limpia. Se eliminaron {count} archivos."
     except Exception as e:
         return f"Error al limpiar: {str(e)}", 500
+
 
 if __name__ == '__main__':
     # Ejecución del servidor
