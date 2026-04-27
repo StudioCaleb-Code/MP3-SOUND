@@ -8,6 +8,7 @@
   font-optical-sizing: auto;
   font-style: normal;
 }
+
 /* modo light mode */
 :root {
   --color-h1: #00a2ff;
@@ -30,43 +31,16 @@
   --border-color-sobra-hover: 0 0px 15px #0078bda9;
   --border-color-boton-hover: #009dff;
 }
-
 /* modo dark mode */
-body.dark {
+/* :root {
   --color-h1: #4f4f4f;
   --color-body: #121212;
   --color-header: #101010;
   --color-secction: #141414;
   --color-footer: #101010;
   --border-color: 1px solid #191919;
-  --color-btn-box: #828282;
-  --color-hr: linear-gradient(to right, #434343, #0088ff, #434343);
-  --input-box-border: 2px solid #292929;
-  --input-box-border-hover: 2px solid #0078bd;
-  --input-box-color: #1b1b1b;
-  --input-box-sombra: 0 0 15px #00050928;
-  --input-color: #008cdc;
-  --border-boton: 2px solid #252525;
-  --border-color-boton: #292929;
-  --border-color-text: #a3a3a3;
-  --border-color-text-hover: #fff;
-  --border-color-sobra-hover: 0 0px 20px #0086e05b;
-  --border-color-boton-hover: #009dff;
-}
-/* Mostrar solo sol en modo claro */
-.bi-sun {
-  display: none;
-}
+} */
 
-/* En modo oscuro */
-body.dark .bi-moon {
-  display: none;
-}
-
-body.dark .bi-sun {
-  display: inline;
-}
-/* Corregido para que el footer no flote en medio de la pantalla */
 body {
   background: var(--color-body);
   min-height: 100vh;
@@ -117,7 +91,7 @@ main {
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  /* position: relative;  */
+  position: relative; /* <--- Añade esto */
   width: 100%; /* Asegura que ocupe todo el ancho */
 }
 
@@ -128,7 +102,7 @@ main {
   justify-content: center;
   flex-direction: column;
   gap: 20px;
-  /* background: var(--color-secction); */
+  background: #ffffff;
   padding: 20px;
   border-radius: 20px;
 }
@@ -141,7 +115,7 @@ main {
 
 .seccion hr {
   border: none;
-  height: 3px;
+  height: 5px;
   width: 30%;
   border-radius: 100px;
   background: var(--color-hr);
@@ -160,20 +134,20 @@ main {
   width: 50%;
   cursor: default;
   border-radius: 20px;
-  border: var(--input-box-border);
   background: var(--input-box-color);
+  border: var(--input-box-border);
   transition: ease 0.5s;
   padding: 18px; /* Movido aqui para que el borde no baile */
 }
 
 .input-box:hover {
-  border: var(--input-box-border-hover);
   box-shadow: var(--input-box-sombra);
+  border: var(--input-box-border-hover);
   width: 100%;
 }
 
 .input-box input {
-  /* caret-shape:underscore; */
+  /* caret-shape: block; */
   color: var(--input-color);
   font-weight: 500;
   cursor: pointer;
@@ -190,7 +164,6 @@ main {
   color: #0085d3;
   animation: vibrar ease 3s infinite;
 }
-
 @keyframes vibrar {
   0% {
     transform: scale(1);
@@ -240,7 +213,7 @@ footer {
 }
 
 footer p {
-  color: #434343;
+  color: #666;
   font-size: 14px;
 }
 
